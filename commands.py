@@ -22,6 +22,8 @@ async def loveme(client, message):
 # Takes the !help command and warns that the sender is distressed.
 async def showhelp(client, message):
     sender =  message.author.nick
+    if sender is None:
+        sender = message.author.name
     await client.send_message(message.channel, 'plz help ' + sender)
     await client.send_message(message.channel, 'they in distress')
 
