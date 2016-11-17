@@ -24,3 +24,8 @@ async def showhelp(client, message):
     sender =  message.author.nick
     await client.send_message(message.channel, 'plz help ' + sender)
     await client.send_message(message.channel, 'they in distress')
+
+# Takes the !git command and returns the URL for the repo.
+async def git(client, message):
+    url = 'https://github.com/CharlesTalbot123/discord-goopbot'
+    await client.send_message(message.channel, url)

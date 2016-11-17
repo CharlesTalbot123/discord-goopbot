@@ -28,8 +28,8 @@ async def on_message(message):
     elif message.content.startswith('!help'):
         print('Received !help from ' + message.author.nick)
         await showhelp(client, message)
-    elif message.content.startswith('!testemoji'):
-        for emoji in client.get_all_emojis():
-            print(emoji.name)
+    elif message.content.startswith('!git'):
+        print('Received !git from ' + message.author.nick)
+        await git(client, message)
 
 client.run(token)
