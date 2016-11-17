@@ -1,0 +1,1 @@
+Bot for the goop city Discord server
