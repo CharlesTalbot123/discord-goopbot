@@ -29,3 +29,11 @@ async def showhelp(client, message):
 async def git(client, message):
     url = 'https://github.com/CharlesTalbot123/discord-goopbot'
     await client.send_message(message.channel, url)
+
+# Takes the !bigwoof command and does a big bark.
+async def bigwoof(client, message):
+    await client.send_message(message.channel, '**BARK**')
+
+# Takes the !woofwoof command and does a couple of barks.
+async def woofwoof(client, message):
+    await client.send_message(message.channel, 'bark bark')
