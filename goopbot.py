@@ -37,5 +37,10 @@ async def on_message(message):
     elif message.content.startswith('!woof'):
         print('Received !woof from ' + message.author.name)
         await woof(client, message)
+    elif 'kill' in message.content.lower() and 'goopbot' in message.content.lower():
+        # Please don't hurt goopbot. He's a good boy.
+        await client.send_message(message.channel, '*frighten*')
+    elif 'love' in message.content.lower() and 'goopbot' in message.content.lower():
+        await client.send_message(message.channel, '*happy*')
 
 client.run(token)
