@@ -39,3 +39,10 @@ async def bigwoof(client, message):
 # Takes the !woofwoof command and does a couple of barks.
 async def woofwoof(client, message):
     await client.send_message(message.channel, 'bark bark')
+
+# Takes the !hug command and gives the sender a well needed hug.
+async def hug(client, message):
+    sender = message.author.nick
+    if sender is None:
+        sender = message.author.name
+    await client.send_message(message.channel, '*doghugs for ' + sender + '*')
