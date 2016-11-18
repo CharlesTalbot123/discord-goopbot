@@ -2,12 +2,14 @@ import discord
 import asyncio
 
 class Commands:
+
+    isFetch = False
+
     # Checks to see if the command is within the list and if it is
     # then executes it. !help and !commands both have to be taken
     # care of seperately due to having function names that are
     # different to their command names.
     async def checkcommands(self, client, message):
-        command_list = self.get_commands()
         in_command = message.content.split(' ')[0].replace('!', '')
         if in_command == 'help':
             await self.showhelp(client, message)
@@ -68,3 +70,23 @@ class Commands:
         if sender is None:
             sender = message.author.name
         await client.send_message(message.channel, '*doghugs for ' + sender + '*')
+
+    # Takes the !smile command and shows their affection.
+    async def smile(self, client, message):
+        await client.send_message(message.channel, ':dog:')
+
+    # Takes in the !fetch command and initiates a game of fetch.
+    async def fetch(self, client, message):
+        self.isFetch = True
+        await client.send_message(message.channel, '*waiting*')
+
+    # Takes in the !throw command and goes to fetch if there's something
+    # to fetch. Otherwise, gets confused.
+    async def throw(self, client, message):
+        if self.isFetch:
+            self.isFetch = False
+            await client.send_message(message.channel, '***CHASE***')
+            await asyncio.sleep(3)
+            await client.send_message(message.channel, '*fetched* :tennis:')
+        else:
+            await client.send_message(message.channel, '*confused*')
