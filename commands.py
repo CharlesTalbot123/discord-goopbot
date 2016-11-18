@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import random
 
 class Commands:
 
@@ -90,3 +91,20 @@ class Commands:
             await client.send_message(message.channel, '*fetched* :tennis:')
         else:
             await client.send_message(message.channel, '*confused*')
+
+    # Takes the !feed command, and supplies a lovely meal.
+    # Puppers might take a variable amount of time to eat.
+    async def feed(self, client, message):
+        # Dinner is served
+        await client.send_message(message.channel, ':dog::meat_on_bone:')
+
+        # Eating
+        lim = random.randint(1,5)
+        while lim > 0:
+            await asyncio.sleep(1)
+            await client.send_message(message.channel, '*chomp*')
+            lim -= 1
+
+        # Wow
+        await client.send_message(message.channel, ':dog::two_hearts:')
+        
