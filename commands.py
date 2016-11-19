@@ -80,6 +80,9 @@ class Commands:
     # Takes in the !fetch command and initiates a game of fetch.
     async def fetch(self, client, message):
         self.isFetch = True
+        fetchgame = discord.Game()
+        fetchgame.name = "fetch!!"
+        await client.change_presence(game=fetchgame)
         await client.send_message(message.channel, '*waiting*')
 
     # Takes in the !throw command and goes to fetch if there's something
@@ -90,6 +93,7 @@ class Commands:
             await client.send_message(message.channel, '***CHASE***')
             await asyncio.sleep(3)
             await client.send_message(message.channel, '*fetched* :tennis:')
+            await client.change_presence()
         else:
             await client.send_message(message.channel, '*confused*')
 
@@ -108,3 +112,9 @@ class Commands:
 
         # Wow
         await client.send_message(message.channel, ':dog::two_hearts:')
+
+    # Takes the !nap command and makes goopbot have a nice nap.
+    async def nap(self, client, message):
+        naptime = discord.Game()
+        naptime.name = "napping"
+        await client.change_presence(game=naptime)
