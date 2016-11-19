@@ -42,7 +42,8 @@ class Commands:
 
     # Takes the !loveme command and shares the love.
     async def loveme(self, client, message):
-        await client.send_message(message.channel, ':heart:')
+        await client.add_reaction(message, '❤')
+        await client.send_message(message.channel, 'arf')
 
     # Takes the !help command and warns that the sender is distressed.
     async def showhelp(self, client, message):
@@ -107,4 +108,3 @@ class Commands:
 
         # Wow
         await client.send_message(message.channel, ':dog::two_hearts:')
-        
