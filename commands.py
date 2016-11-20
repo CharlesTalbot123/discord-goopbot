@@ -12,12 +12,16 @@ class Commands:
     # different to their command names.
     async def checkcommands(self, client, message):
         in_command = message.content.split(' ')[0].replace('!', '')
+        sender = message.author.name
         if in_command == 'help':
+            print('Received !help from ' + sender)
             await self.showhelp(client, message)
         elif in_command == 'commands':
+            print('Received !commands from ' + sender)
             await self.commandhelp(client, message)
         else:
             if hasattr(self, in_command):
+                print('Received !' + in_command + ' from ' + sender)
                 cmd = getattr(self, in_command)
                 await cmd(client, message)
 
@@ -102,19 +106,29 @@ class Commands:
     async def feed(self, client, message):
         # Dinner is served
         await client.send_message(message.channel, ':dog::meat_on_bone:')
-
         # Eating
         lim = random.randint(1,5)
         while lim > 0:
             await asyncio.sleep(1)
             await client.send_message(message.channel, '*chomp*')
             lim -= 1
-
         # Wow
         await client.send_message(message.channel, ':dog::two_hearts:')
 
-    # Takes the !nap command and makes goopbot have a nice nap.
-    async def nap(self, client, message):
-        naptime = discord.Game()
-        naptime.name = "napping"
-        await client.change_presence(game=naptime)
+    # Takes the !getin [name] command and asks a user with
+    # the name [name] to get in.
+    async def getin(self, client, message):
+        if len(message.content.split(' ')) < 2:
+            await client.send_message(message.channel, '*confused*')
+            return
+        name = message.content.split(' ', 1)[1]
+        for user in message.server.members:
+            if user.nick is not None:
+                if user.nick.startswith(name):
+                     await client.send_message(message.channel, 'ruff ' + user.mention)
+                     return
+            if user.name.startswith(name):
+                await client.send_message(message.channel, 'ruff ' + user.mention)
+                return
+
+
