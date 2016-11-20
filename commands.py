@@ -122,13 +122,16 @@ class Commands:
             await client.send_message(message.channel, '*confused*')
             return
         name = message.content.split(' ', 1)[1]
+        # If the name matches partially matches the beginning of
+        # a user's name in the server, mention them.
         for user in message.server.members:
             if user.nick is not None:
                 if user.nick.startswith(name):
-                     await client.send_message(message.channel, 'ruff ' + user.mention)
+                     await client.send_message(message.channel, 'ruff '
+                                                + user.mention)
                      return
             if user.name.startswith(name):
-                await client.send_message(message.channel, 'ruff ' + user.mention)
+                await client.send_message(message.channel, 'ruff '
+                                            + user.mention)
                 return
-
-
+        await client.send_message(message.channel, '*confused*')
