@@ -121,17 +121,25 @@ class Commands:
         if len(message.content.split(' ')) < 2:
             await client.send_message(message.channel, '*confused*')
             return
-        name = message.content.split(' ', 1)[1]
+        name = message.content.split(' ', 1)[1].lower()
         # If the name matches partially matches the beginning of
         # a user's name in the server, mention them.
         for user in message.server.members:
             if user.nick is not None:
-                if user.nick.startswith(name):
+                if user.nick.lower().startswith(name):
                      await client.send_message(message.channel, 'ruff '
                                                 + user.mention)
                      return
-            if user.name.startswith(name):
+            if user.name.lower().startswith(name):
                 await client.send_message(message.channel, 'ruff '
                                             + user.mention)
                 return
         await client.send_message(message.channel, '*confused*')
+
+    async def birthday(self, client, message):
+        if len(message.content.split(' ')) < 2:
+            await client.send_message(message.channel, '*confused*')
+            return
+        name = message.content.split(' ', 1)[1]
+        await client.send_message(message.channel, 'birthwoof ' + name)
+        await client.send_message(message.channel, ':birthday:')
