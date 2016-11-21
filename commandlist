@@ -10,3 +10,4 @@ throw
 fetch
 feed
 getin [name]
+echo [echo]

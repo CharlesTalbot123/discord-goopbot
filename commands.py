@@ -143,3 +143,30 @@ class Commands:
         name = message.content.split(' ', 1)[1]
         await client.send_message(message.channel, 'birthwoof ' + name)
         await client.send_message(message.channel, ':birthday:')
+
+    # Takes in the !echo [echo] command and echos it. But
+    # goopbot is a dog, goopbot can't speak.
+    async def echo(self, client, message):
+        if len(message.content.split(' ')) < 2:
+            await client.send_message(message.channel, '*confused*')
+            return
+        echo = message.content.split(' ', 1)[1].lower().split(' ')
+        dog_echo = []
+        for word in echo:
+            if word.startswith('a'):
+                dog_echo.append('arf')
+            elif word.startswith('r'):
+                dog_echo.append('ruff')
+            elif word.startswith('b'):
+                dog_echo.append('bark')
+            elif word.startswith('f'):
+                dog_echo.append('freh')
+            elif word.startswith('y'):
+                dog_echo.append('yap')
+            elif word.startswith('w'):
+                dog_echo.append('warf')
+            elif word.startswith('z'):
+                dog_echo.append('???')
+            else:
+                dog_echo.append('woof')
+        await client.send_message(message.channel, ' '.join(dog_echo))
