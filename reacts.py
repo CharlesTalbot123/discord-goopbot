@@ -12,6 +12,8 @@ class Reacts:
             await self.goopbothate(client, message)
         elif 'love' in content.lower() and 'goopbot' in content.lower():
             await self.goopbotlove(client, message)
+        elif 'good' in content.lower() and 'boy' in content.lower():
+            await self.goodboy(client, message)
 
     # Reacts to 'love' and 'goopbot' being in the same sentence.
     async def goopbotlove(self, client, message):
@@ -22,3 +24,7 @@ class Reacts:
     async def goopbothate(self, client, message):
         await client.send_message(message.channel, '*frighten*')
 
+    # Reacts to 'good' and 'boy' being in the same sentence.
+    # goopbot good boy.
+    async def goodboy(self, client, message):
+        await client.send_message(message.channel, '*happy boy*')
