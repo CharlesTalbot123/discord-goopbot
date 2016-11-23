@@ -167,6 +167,8 @@ class Commands:
                 dog_echo.append('warf')
             elif word.startswith('z'):
                 dog_echo.append('???')
+            elif word.startswith('goopbot'):
+                dog_echo.append('**yip**')
             else:
                 dog_echo.append('woof')
         await client.send_message(message.channel, ' '.join(dog_echo))
