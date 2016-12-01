@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import random
+from random import shuffle
 
 class Commands:
 
@@ -169,6 +170,26 @@ class Commands:
                 dog_echo.append('???')
             elif word.startswith('goopbot'):
                 dog_echo.append('**yip**')
+            elif word.startswith('king'):
+                dog_echo.append('*happy*')
             else:
                 dog_echo.append('woof')
         await client.send_message(message.channel, ' '.join(dog_echo))
+
+    # Takes in the !adlib command and grabs random words from
+    # the past 100 messages that do not begin with ! or were
+    # sent by goopbot and sends them in a random order.
+    async def adlib(self, client, message):
+        for role in message.author.roles:
+            if role.name == 'fool':
+                await client.send_message(message.channel, 'arf')
+                return
+        adlib = []
+        async for log in client.logs_from(message.channel, limit=200):
+            if (log.author != client.user and not log.content.startswith('!')
+                and '/' not in log.content):
+                words = log.content.split(' ')
+                shuffle(words)
+                adlib.append(words[0])
+        shuffle(adlib)
+        await client.send_message(message.channel, ' '.join(adlib[:20]))
