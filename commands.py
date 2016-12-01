@@ -193,3 +193,13 @@ class Commands:
                 adlib.append(words[0])
         shuffle(adlib)
         await client.send_message(message.channel, ' '.join(adlib[:20]))
+
+    # Takes in the !love command and waits to receive love.
+    async def love(self, client, message):
+        waiting = await client.send_message(message.channel, "*wants love*")
+        reaction = await client.wait_for_reaction(emoji='❤', message=waiting,
+                                            timeout=15)
+        if reaction is None:
+            await client.edit_message(waiting, new_content='*sad*')
+        else:
+            await client.edit_message(waiting, new_content=':heart:')

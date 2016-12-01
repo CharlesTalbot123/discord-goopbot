@@ -11,3 +11,5 @@ fetch
 feed
 getin [name]
 echo [echo]
+adlib
+love
