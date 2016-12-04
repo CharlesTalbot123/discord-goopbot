@@ -14,6 +14,8 @@ class Commands:
     async def checkcommands(self, client, message):
         in_command = message.content.split(' ')[0].replace('!', '')
         sender = message.author.name
+        if sender == 'emotional man':
+            await client.send_message(message.channel, ':|')
         if in_command == 'help':
             print('Received !help from ' + sender)
             await self.showhelp(client, message)
@@ -203,3 +205,23 @@ class Commands:
             await client.edit_message(waiting, new_content='*sad*')
         else:
             await client.edit_message(waiting, new_content=':heart:')
+
+    # Takes in the !roll #d# command
+    async def roll(self, client, message):
+        if not len(message.content.split(' ')) == 2:
+            await client.send_message(message.channel, '*confused*')
+            return
+        dice = message.content.split(' ')[1]
+        if not len(dice.split('d')) == 2:
+            await client.send_message(message.channel, '*confused*')
+            return
+        num_dice = dice.split('d')[0]
+        size_dice = dice.split('d')[1]
+        if num_dice.isdigit() and size_dice.isdigit():
+            total = 0
+            for _ in range(0, int(num_dice)):
+                total = total + random.randint(1, int(size_dice))
+            await client.send_message(message.channel, str(total) + ' ruffs')
+        else:
+            await client.send_message(message.channel, '*confused*')
+            return

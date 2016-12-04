@@ -13,3 +13,4 @@ getin [name]
 echo [echo]
 adlib
 love
+roll [#d#]
