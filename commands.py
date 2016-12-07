@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import random
+import time
 from random import shuffle
 
 class Commands:
@@ -17,14 +18,16 @@ class Commands:
         if sender == 'emotional man':
             await client.send_message(message.channel, ':|')
         if in_command == 'help':
-            print('Received !help from ' + sender)
+            print(time.strftime('[%H:%M:%S]') + 'Received !help from ' + sender)
             await self.showhelp(client, message)
         elif in_command == 'commands':
-            print('Received !commands from ' + sender)
+            print(time.strftime('[%H:%M:%S]') + 'Received !commands from ' +
+                    sender)
             await self.commandhelp(client, message)
         else:
             if hasattr(self, in_command):
-                print('Received !' + in_command + ' from ' + sender)
+                print(time.strftime('[%H:%M:%S]') + 'Received !' + in_command +
+                        ' from ' + sender)
                 cmd = getattr(self, in_command)
                 await cmd(client, message)
 
